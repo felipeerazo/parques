@@ -119,7 +119,7 @@ public class FormInicial extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Dirección ip Jugador 3:");
 
-        jTextField1.setText("192.168.1.6");
+        jTextField1.setText("192.168.1.5");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -477,7 +477,7 @@ public class FormInicial extends javax.swing.JFrame {
             setFt(new FormTablero(ag));
             getFt().recibirNum(jugadores);
             getFt().getCtrlReglas().setIndiceTurno(0);
-            getFt().setVisible(true);
+           getFt().setVisible(true);
             getFt().empezar();
             this.dispose();
         } catch (InterruptedException ex) {

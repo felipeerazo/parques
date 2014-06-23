@@ -31,7 +31,7 @@ public class Agente extends GuiAgent {
     LinkedList<DireccionAgente> direcciones;
     private Celda[][] celdas;
     int indice;
-    private Ficha [][] fichas;
+    private Ficha[][] fichas;
 
     @Override
     protected void setup() {
@@ -61,13 +61,11 @@ public class Agente extends GuiAgent {
         this.direcciones = direcciones;
         this.setColorJugador(color);
         this.setTipoJuego(tipoJuego);
-        
+
     }
 
     public void mostrarMensaje(String msj) {
         System.out.println(msj);
-
-        
 
     }
 
@@ -105,7 +103,7 @@ public class Agente extends GuiAgent {
 
     }
 
-    public void validarMto(int[] dados,  JLabel notificaciones) {
+    public void validarMto(int[] dados, JLabel notificaciones) {
         nodos = new LinkedList<>();
         boolean puedeComer0 = true;
         boolean puedeComer2 = true;
@@ -185,9 +183,11 @@ public class Agente extends GuiAgent {
             }
             if (esSeguroOSalida(k)) {
                 if (asegurar) {
+                     if (fichas[indice][i].x != fichas[indice][i].getxInicial() && fichas[indice][i].y != fichas[indice][i].getyInicial()) {
+           
                     nodos.add(new Nodo("asegurar", "dados0", fichas[indice][i].getPosicionActual() + (dados[0]), fichas[indice][i]));
                     asegurar = false;
-                }
+                }}
             }
 
             k = ((fichas[indice][i].getPosicionActual() + dados[1]) % 17) - 1;
@@ -196,8 +196,10 @@ public class Agente extends GuiAgent {
             }
             if (esSeguroOSalida(k)) {
                 if (asegurar) {
+                     if (fichas[indice][i].x != fichas[indice][i].getxInicial() && fichas[indice][i].y != fichas[indice][i].getyInicial()) {
+           
                     nodos.add(new Nodo("asegurar", "dados1", fichas[indice][i].getPosicionActual() + (dados[1]), fichas[indice][i]));
-                }
+                }}
                 asegurar = false;
             }
             k = ((fichas[indice][i].getPosicionActual() + dados[0] + dados[1]) % 17) - 1;
@@ -205,8 +207,10 @@ public class Agente extends GuiAgent {
                 k = 16;
             }
             if (esSeguroOSalida(k)) {
+                 if (fichas[indice][i].x != fichas[indice][i].getxInicial() && fichas[indice][i].y != fichas[indice][i].getyInicial()) {
+           
                 nodos.add(new Nodo("asegurar", "dados+", fichas[indice][i].getPosicionActual() + (dados[0] + dados[1]), fichas[indice][i]));
-            }
+            }}
         }
         int max = 0;
         int indiceMax = 0;
@@ -222,9 +226,11 @@ public class Agente extends GuiAgent {
 //        nodos.add(new Nodo("avanzar", "dados1", max + (dados[1]), fichas[indice][indiceMax]));
 
         for (int i = 1; i < 2; i++) {
-            nodos.add(new Nodo("avanzar", "dados+", fichas[indice][i].getPosicionActual() + (dados[0] + dados[1]), fichas[indice][i]));
-            nodos.add(new Nodo("avanzar", "dados0", fichas[indice][i].getPosicionActual() + (dados[0]), fichas[indice][i]));
-            nodos.add(new Nodo("avanzar", "dados1", fichas[indice][i].getPosicionActual() + (dados[1]), fichas[indice][i]));
+            if (fichas[indice][i].x != fichas[indice][i].getxInicial() && fichas[indice][i].y != fichas[indice][i].getyInicial()) {
+                nodos.add(new Nodo("avanzar", "dados+", fichas[indice][i].getPosicionActual() + (dados[0] + dados[1]), fichas[indice][i]));
+                nodos.add(new Nodo("avanzar", "dados0", fichas[indice][i].getPosicionActual() + (dados[0]), fichas[indice][i]));
+                nodos.add(new Nodo("avanzar", "dados1", fichas[indice][i].getPosicionActual() + (dados[1]), fichas[indice][i]));
+            }
         }
 
         for (int i = 0; i < nodos.size(); i++) {
@@ -286,6 +292,7 @@ public class Agente extends GuiAgent {
                 }
 
             } else if (nodos.get(i).getAccion().equals("sacarCarcel")) {
+
                 nodos.get(i).getFicha().moverseHasta(celdas[4][nodos.get(i).getFicha().getIndiceColor()]);
                 nodos.get(i).getFicha().setContadorDeCeldas(0);
                 notificaciones.setText("Acabó");
@@ -420,7 +427,7 @@ public class Agente extends GuiAgent {
         return direcciones.get(0).color;
     }
 
-     /**
+    /**
      * @return the fichas
      */
     public Ficha[][] getFichas() {

@@ -588,6 +588,11 @@ public class FormTablero extends javax.swing.JFrame {
     }
 
     public void accionarMovimientoAutom() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FormTablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dados[0] = -1;
         dados[1] = -1;
         jButton4.doClick();
