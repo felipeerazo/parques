@@ -120,6 +120,7 @@ public class Agente extends GuiAgent {
             indice = 3;
         }
 
+        
         for (int z = 0; z < 4; z++) {
 
             for (int i = 0; i < 4; i++) {
